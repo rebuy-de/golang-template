@@ -1,5 +1,5 @@
 # Source: https://github.com/rebuy-de/golang-template
-# Version: 1.0.0-dev
+# Version: 1.0.0-snapshot
 # Dependencies:
 # * Glide
 # * gocov (https://github.com/axw/gocov)
