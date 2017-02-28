@@ -1,18 +1,11 @@
-# golang-template
+# My New Fancy Go Application
 
-A template for new Golang projects.
+very fancy. very wow. much go.
 
-## Usage
+## Checklist
 
-1. Copy all files into the new project.
-2. `s/golang-template/your-project/`
-  * in every file
-  * don't miss `.gitignore`
+* [ ] search and replace `github.com/rebuy-de/golang-template/example`
+  * `git grep -n 'golang-template/example'` might help
+* [ ] update `.gitignore`
+* [ ] Update `README.md`
 
-## Updating
-
-The `golang.mk` is a Makefile include file.
-It is designed to be replaced by an updated version.
-
-1. Overwrite the `golang.mk` in your project with the one in this one.
-2. Check this `Makefile` to see if some parameters might have changed.
