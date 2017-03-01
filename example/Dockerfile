@@ -1,5 +1,5 @@
 # Source: https://github.com/rebuy-de/golang-template
-# Version: 1.0.0-snapshot
+# Version: 1.0.0
 
 FROM golang:1.8-alpine
 
