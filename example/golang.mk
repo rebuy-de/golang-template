@@ -1,5 +1,5 @@
 # Source: https://github.com/rebuy-de/golang-template
-# Version: 1.0.1-snapshot
+# Version: 1.1.1-snapshot
 # Dependencies:
 # * Glide
 # * gocov (https://github.com/axw/gocov)
@@ -46,7 +46,6 @@ cov:
 		| gocov-html > coverage.html
 
 build: vendor
-	CGO_ENABLED=0 \
 	go build \
 		$(BUILD_FLAGS) \
 		-o $(NAME)-$(BUILD_VERSION)
@@ -54,7 +53,6 @@ build: vendor
 
 
 install: test
-	CGO_ENABLED=0 \
 	go install \
 		$(BUILD_FLAGS)
 

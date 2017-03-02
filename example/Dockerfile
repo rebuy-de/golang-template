@@ -1,5 +1,5 @@
 # Source: https://github.com/rebuy-de/golang-template
-# Version: 1.0.1-snapshot
+# Version: 1.1.1-snapshot
 
 FROM golang:1.8-alpine
 
@@ -20,6 +20,6 @@ RUN go install
 
 COPY . /go/src/github.com/rebuy-de/golang-template/example
 WORKDIR /go/src/github.com/rebuy-de/golang-template/example
-RUN make install
+RUN CGO_ENABLED=0 make install
 
 ENTRYPOINT ["/go/bin/example"]
