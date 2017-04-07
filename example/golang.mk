@@ -35,7 +35,10 @@ vendor: glide.lock glide.yaml
 format:
 	gofmt -s -w $(GOFILES)
 
-test: vendor
+test_gopath:
+	test $$(go list) = "$(PACKAGE)"
+
+test: test_gopath vendor
 	go test $(GOPKGS)
 
 vet:
