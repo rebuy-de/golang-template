@@ -35,14 +35,22 @@ vendor: glide.lock glide.yaml
 format:
 	gofmt -s -w $(GOFILES)
 
+vet:
+	go vet $(GOPKGS)
+
+lint:
+	$(foreach pkg,$(GOPKGS),golint $(pkg);)
+
 test_gopath:
 	test $$(go list) = "$(PACKAGE)"
 
-test: test_gopath vendor
+test_packages: vendor
 	go test $(GOPKGS)
 
-vet:
-	go vet $(GOPKGS)
+test_format:
+	gofmt -l $(GOFILES)
+
+test: test_gopath test_format vet lint test_packages
 
 cov:
 	gocov test -v $(GOPKGS) \
