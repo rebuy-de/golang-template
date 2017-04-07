@@ -1,5 +1,5 @@
 # Source: https://github.com/rebuy-de/golang-template
-# Version: 1.2.1-snapshot
+# Version: 1.2.2-snapshot
 # Dependencies:
 # * Glide
 # * gocov (https://github.com/axw/gocov)
@@ -8,7 +8,7 @@
 NAME=$(notdir $(PACKAGE))
 
 BUILD_VERSION=$(shell git describe --always --dirty --tags | tr '-' '.' )
-BUILD_DATE=$(shell date -Iseconds)
+BUILD_DATE=$(shell date)
 BUILD_HASH=$(shell git rev-parse HEAD)
 BUILD_MACHINE=$(shell echo $$HOSTNAME)
 BUILD_USER=$(shell whoami)
