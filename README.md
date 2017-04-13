@@ -17,6 +17,8 @@ The `golang.mk` is a Makefile include file. This include file and the
 1. Copy updated `Dockerfile` and `golang.mk` into your project.
 2. Take a look at the diff to see if things might break.
 
+There is also an script, which does that for you. Simply run `./copy.sh <target-dir>` to update the project in the specified directory.
+
 ## Development
 
 1. Do stuff.
