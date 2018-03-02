@@ -14,6 +14,7 @@ BUILD_MACHINE=$(shell echo $$HOSTNAME)
 BUILD_USER=$(shell whoami)
 
 BUILD_FLAGS=-ldflags "\
+	-s -w \
 	-X '$(PACKAGE)/cmd.BuildVersion=$(BUILD_VERSION)' \
 	-X '$(PACKAGE)/cmd.BuildDate=$(BUILD_DATE)' \
 	-X '$(PACKAGE)/cmd.BuildHash=$(BUILD_HASH)' \
@@ -59,12 +60,14 @@ cov:
 build: vendor
 	go build \
 		$(BUILD_FLAGS) \
-		-o $(NAME)-$(BUILD_VERSION)-$(shell go env GOOS)-$(shell go env GOARCH)
-	ln -sf $(NAME)-$(BUILD_VERSION)-$(shell go env GOOS)-$(shell go env GOARCH) $(NAME)
+		-o $(NAME)-$(BUILD_VERSION)-$(shell go env GOOS)-$(shell go env GOARCH)$(shell go env GOEXE)
+	ln -sf $(NAME)-$(BUILD_VERSION)-$(shell go env GOOS)-$(shell go env GOARCH)$(shell go env GOEXE) $(NAME)$(shell go env GOEXE)
 
 xc:
 	GOOS=linux GOARCH=amd64 make build
 	GOOS=darwin GOARCH=amd64 make build
+	GOOS=windows GOARCH=386 make build
+	GOOS=windows GOARCH=amd64 make build
 
 install: test
 	go install \
