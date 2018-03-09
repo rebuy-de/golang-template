@@ -1,7 +1,7 @@
 # Source: https://github.com/rebuy-de/golang-template
 # Version: 1.3.2-snapshot
 
-FROM golang:1.10-alpine
+FROM golang:1.10-alpine as builder
 
 RUN apk add --no-cache git make
 
@@ -18,4 +18,7 @@ COPY . /go/src/github.com/rebuy-de/golang-template/example
 WORKDIR /go/src/github.com/rebuy-de/golang-template/example
 RUN CGO_ENABLED=0 make install
 
-ENTRYPOINT ["/go/bin/example"]
+
+FROM alpine:latest
+COPY --from=builder /go/bin/example /usr/local/bin/
+ENTRYPOINT /usr/local/bin/example
