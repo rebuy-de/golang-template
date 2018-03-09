@@ -1,0 +1,15 @@
+[[constraint]]
+  name = "github.com/sirupsen/logrus"
+  version = "1.0.4"
+
+[[constraint]]
+  name = "github.com/spf13/cobra"
+  branch = "master"
+
+[[constraint]]
+  name = "github.com/rebuy-de/rebuy-go-sdk"
+  version = "1.0.0"
+
+[[constraint]]
+  name = "gopkg.in/gemnasium/logrus-graylog-hook.v2"
+  version = "2.0.7"

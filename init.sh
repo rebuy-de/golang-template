@@ -18,6 +18,11 @@ then
 fi
 
 (
+    cd ./example
+    make clean
+)
+
+(
     set -x
     cp -a ./example ${target} 
     cd ${target}
