@@ -12,12 +12,16 @@ BUILD_DATE=$(shell date)
 BUILD_HASH=$(shell git rev-parse HEAD)
 BUILD_MACHINE=$(shell echo $$HOSTNAME)
 BUILD_USER=$(shell whoami)
+BUILD_ENVIRONMENT=$(BUILD_USER)@$(BUILD_MACHINE)
 
+BUILD_XDST=$(PACKAGE)/vendor/github.com/rebuy-de/rebuy-go-sdk/cmdutil
 BUILD_FLAGS=-ldflags "\
-	-X '$(PACKAGE)/cmd.BuildVersion=$(BUILD_VERSION)' \
-	-X '$(PACKAGE)/cmd.BuildDate=$(BUILD_DATE)' \
-	-X '$(PACKAGE)/cmd.BuildHash=$(BUILD_HASH)' \
-	-X '$(PACKAGE)/cmd.BuildEnvironment=$(BUILD_USER)@$(BUILD_MACHINE)' \
+	-X '$(BUILD_XDST).BuildName=$(NAME)' \
+	-X '$(BUILD_XDST).BuildPackage=$(PACKAGE)' \
+	-X '$(BUILD_XDST).BuildVersion=$(BUILD_VERSION)' \
+	-X '$(BUILD_XDST).BuildDate=$(BUILD_DATE)' \
+	-X '$(BUILD_XDST).BuildHash=$(BUILD_HASH)' \
+	-X '$(BUILD_XDST).BuildEnvironment=$(BUILD_ENVIRONMENT)' \
 "
 
 GOFILES=$(shell find . -type f -name '*.go' -not -path "./vendor/*")
@@ -57,7 +61,7 @@ cov:
 	gocov test -v $(GOPKGS) \
 		| gocov-html > coverage.html
 
-build: vendor
+build:
 	go build \
 		$(BUILD_FLAGS) \
 		-o $(NAME)-$(BUILD_VERSION)-$(shell go env GOOS)-$(shell go env GOARCH)

@@ -3,12 +3,9 @@
   version = "1.0.4"
 
 [[constraint]]
-  name = "github.com/spf13/cobra"
-  branch = "master"
-
-[[constraint]]
   name = "github.com/rebuy-de/rebuy-go-sdk"
-  version = "1.0.0"
+  #version = "1.0.0"
+  branch = "reduce-copy-pasta-overhead"
 
 [[constraint]]
   name = "gopkg.in/gemnasium/logrus-graylog-hook.v2"

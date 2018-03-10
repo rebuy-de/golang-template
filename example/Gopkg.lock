@@ -14,10 +14,10 @@
   version = "v0.8.0"
 
 [[projects]]
+  branch = "reduce-copy-pasta-overhead"
   name = "github.com/rebuy-de/rebuy-go-sdk"
   packages = ["cmdutil"]
-  revision = "83f49db7b780f8083fbd32761f8dead708fd8a58"
-  version = "v1.0.0"
+  revision = "948c998197a5d9c92c923e48bbe7df80ba8aa8e4"
 
 [[projects]]
   name = "github.com/sirupsen/logrus"
@@ -58,6 +58,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "042804c2dd5987e385c42715e71f32acca2c72e516c04a3e1f11f52f7adeda7b"
+  inputs-digest = "8f9aae4517513cea227f8f856b7a5b06a74167f8a14f6fe479615be4abc27f6e"
   solver-name = "gps-cdcl"
   solver-version = 1
