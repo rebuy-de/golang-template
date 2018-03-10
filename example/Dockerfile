@@ -1,7 +1,7 @@
 # Source: https://github.com/rebuy-de/golang-template
-# Version: 1.3.2-snapshot
+# Version: 1.4.1-snapshot
 
-FROM golang:1.8-alpine
+FROM golang:1.10-alpine as builder
 
 RUN apk add --no-cache git make
 
@@ -12,17 +12,13 @@ RUN mkdir -p ${GOPATH}/src ${GOPATH}/bin
 
 # Install Go Tools
 RUN go get -u github.com/golang/lint/golint
-
-# Install Glide
-RUN go get -u github.com/Masterminds/glide/...
-
-WORKDIR /go/src/github.com/Masterminds/glide
-
-RUN git checkout v0.12.3
-RUN go install
+RUN go get -u github.com/golang/dep/cmd/dep
 
 COPY . /go/src/github.com/rebuy-de/golang-template/example
 WORKDIR /go/src/github.com/rebuy-de/golang-template/example
 RUN CGO_ENABLED=0 make install
 
-ENTRYPOINT ["/go/bin/example"]
+
+FROM alpine:latest
+COPY --from=builder /go/bin/example /usr/local/bin/
+ENTRYPOINT /usr/local/bin/example
