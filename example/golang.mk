@@ -13,8 +13,13 @@ BUILD_HASH=$(shell git rev-parse HEAD)
 BUILD_MACHINE=$(shell echo $$HOSTNAME)
 BUILD_USER=$(shell whoami)
 
+ifneq ($(STRIP_BIN),)
+STRIP_FLAGS=-s -w
+else
+STRIP_FLAGS=
+endif
 BUILD_FLAGS=-ldflags "\
-	-s -w \
+	$(STRIP_FLAGS) \
 	-X '$(PACKAGE)/cmd.BuildVersion=$(BUILD_VERSION)' \
 	-X '$(PACKAGE)/cmd.BuildDate=$(BUILD_DATE)' \
 	-X '$(PACKAGE)/cmd.BuildHash=$(BUILD_HASH)' \
