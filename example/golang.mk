@@ -40,7 +40,7 @@ vendor: Gopkg.lock Gopkg.toml
 format:
 	gofmt -s -w $(GOFILES)
 
-vet:
+vet: vendor
 	go vet $(GOPKGS)
 
 lint:
