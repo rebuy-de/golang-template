@@ -1,7 +1,7 @@
 # Source: https://github.com/rebuy-de/golang-template
-# Version: 1.3.2-snapshot
+# Version: 1.4.1-snapshot
 # Dependencies:
-# * Glide
+# * dep (https://github.com/golang/dep)
 # * gocov (https://github.com/axw/gocov)
 # * gocov-html (https://github.com/matm/gocov-html)
 
@@ -12,35 +12,36 @@ BUILD_DATE=$(shell date)
 BUILD_HASH=$(shell git rev-parse HEAD)
 BUILD_MACHINE=$(shell echo $$HOSTNAME)
 BUILD_USER=$(shell whoami)
+BUILD_ENVIRONMENT=$(BUILD_USER)@$(BUILD_MACHINE)
 
-ifneq ($(STRIP_BINARIES),)
-ADDITIONAL_LDFLAGS+=-s -w
-endif
-
+BUILD_XDST=$(PACKAGE)/vendor/github.com/rebuy-de/rebuy-go-sdk/cmdutil
 BUILD_FLAGS=-ldflags "\
 	$(ADDITIONAL_LDFLAGS) \
-	-X '$(PACKAGE)/cmd.BuildVersion=$(BUILD_VERSION)' \
-	-X '$(PACKAGE)/cmd.BuildDate=$(BUILD_DATE)' \
-	-X '$(PACKAGE)/cmd.BuildHash=$(BUILD_HASH)' \
-	-X '$(PACKAGE)/cmd.BuildEnvironment=$(BUILD_USER)@$(BUILD_MACHINE)' \
+	-X '$(BUILD_XDST).BuildName=$(NAME)' \
+	-X '$(BUILD_XDST).BuildPackage=$(PACKAGE)' \
+	-X '$(BUILD_XDST).BuildVersion=$(BUILD_VERSION)' \
+	-X '$(BUILD_XDST).BuildDate=$(BUILD_DATE)' \
+	-X '$(BUILD_XDST).BuildHash=$(BUILD_HASH)' \
+	-X '$(BUILD_XDST).BuildEnvironment=$(BUILD_ENVIRONMENT)' \
 "
 
 GOFILES=$(shell find . -type f -name '*.go' -not -path "./vendor/*")
-GOPKGS=$(shell glide nv)
+GOPKGS=$(shell go list ./...)
 
 default: build
 
-glide.lock: glide.yaml
-	glide update
+Gopkg.lock: Gopkg.toml
+	dep ensure
+	touch Gopkg.lock
 
-vendor: glide.lock glide.yaml
-	glide install
+vendor: Gopkg.lock Gopkg.toml
+	dep ensure
 	touch vendor
 
 format:
 	gofmt -s -w $(GOFILES)
 
-vet:
+vet: vendor
 	go vet $(GOPKGS)
 
 lint:
@@ -53,7 +54,7 @@ test_packages: vendor
 	go test $(GOPKGS)
 
 test_format:
-	gofmt -l $(GOFILES)
+	gofmt -s -l $(GOFILES)
 
 test: test_gopath test_format vet lint test_packages
 
@@ -61,7 +62,7 @@ cov:
 	gocov test -v $(GOPKGS) \
 		| gocov-html > coverage.html
 
-build: vendor
+build:
 	go build \
 		$(BUILD_FLAGS) \
 		-o $(NAME)-$(BUILD_VERSION)-$(shell go env GOOS)-$(shell go env GOARCH)$(shell go env GOEXE)
