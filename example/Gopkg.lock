@@ -14,22 +14,22 @@
   version = "v0.8.0"
 
 [[projects]]
-  branch = "reduce-copy-pasta-overhead"
   name = "github.com/rebuy-de/rebuy-go-sdk"
   packages = ["cmdutil"]
-  revision = "948c998197a5d9c92c923e48bbe7df80ba8aa8e4"
+  revision = "83c94073601d5f5f4bd2ca335a0576ee3bc8af69"
+  version = "v1.1.0"
 
 [[projects]]
   name = "github.com/sirupsen/logrus"
   packages = ["."]
-  revision = "d682213848ed68c0a260ca37d6dd5ace8423f5ba"
-  version = "v1.0.4"
+  revision = "c155da19408a8799da419ed3eeb0cb5db0ad5dbc"
+  version = "v1.0.5"
 
 [[projects]]
-  branch = "master"
   name = "github.com/spf13/cobra"
   packages = ["."]
-  revision = "be77323fc05148ef091e83b3866c0d47c8e74a8b"
+  revision = "7b2c5ac9fc04fc5efafb60700713d4fa609b777b"
+  version = "v0.0.1"
 
 [[projects]]
   name = "github.com/spf13/pflag"
@@ -41,13 +41,13 @@
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
-  revision = "9de5f2eaf759b4c4550b3db39fed2e9e5f86f45c"
+  revision = "c7dcf104e3a7a1417abc0230cb0d5240d764159d"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix","windows"]
-  revision = "37707fdb30a5b38865cfb95e5aab41707daec7fd"
+  revision = "c28acc882ebcbfbe8ce9f0f14b9ac26ee138dd51"
 
 [[projects]]
   name = "gopkg.in/gemnasium/logrus-graylog-hook.v2"
@@ -58,6 +58,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "8f9aae4517513cea227f8f856b7a5b06a74167f8a14f6fe479615be4abc27f6e"
+  inputs-digest = "c02ee07060354b084fe83a1f7bad1e9a559ddec4e3d58807d2851dceb60eb55c"
   solver-name = "gps-cdcl"
   solver-version = 1
