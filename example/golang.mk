@@ -53,7 +53,7 @@ test_packages: vendor
 	go test $(GOPKGS)
 
 test_format:
-	gofmt -l $(GOFILES)
+	gofmt -s -l $(GOFILES)
 
 test: test_gopath test_format vet lint test_packages
 
