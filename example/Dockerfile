@@ -21,4 +21,4 @@ RUN CGO_ENABLED=0 make install
 
 FROM alpine:latest
 COPY --from=builder /go/bin/example /usr/local/bin/
-ENTRYPOINT /usr/local/bin/example
+ENTRYPOINT ["/usr/local/bin/example"]
