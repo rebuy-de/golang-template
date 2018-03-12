@@ -1,7 +1,7 @@
 # Source: https://github.com/rebuy-de/golang-template
 # Version: 1.4.1-snapshot
 # Dependencies:
-# * Godep
+# * dep (https://github.com/golang/dep)
 # * gocov (https://github.com/axw/gocov)
 # * gocov-html (https://github.com/matm/gocov-html)
 
