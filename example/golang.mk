@@ -16,6 +16,7 @@ BUILD_ENVIRONMENT=$(BUILD_USER)@$(BUILD_MACHINE)
 
 BUILD_XDST=$(PACKAGE)/vendor/github.com/rebuy-de/rebuy-go-sdk/cmdutil
 BUILD_FLAGS=-ldflags "\
+	$(ADDITIONAL_LDFLAGS) \
 	-X '$(BUILD_XDST).BuildName=$(NAME)' \
 	-X '$(BUILD_XDST).BuildPackage=$(PACKAGE)' \
 	-X '$(BUILD_XDST).BuildVersion=$(BUILD_VERSION)' \
@@ -64,12 +65,14 @@ cov:
 build:
 	go build \
 		$(BUILD_FLAGS) \
-		-o $(NAME)-$(BUILD_VERSION)-$(shell go env GOOS)-$(shell go env GOARCH)
-	ln -sf $(NAME)-$(BUILD_VERSION)-$(shell go env GOOS)-$(shell go env GOARCH) $(NAME)
+		-o $(NAME)-$(BUILD_VERSION)-$(shell go env GOOS)-$(shell go env GOARCH)$(shell go env GOEXE)
+	ln -sf $(NAME)-$(BUILD_VERSION)-$(shell go env GOOS)-$(shell go env GOARCH)$(shell go env GOEXE) $(NAME)$(shell go env GOEXE)
 
 xc:
 	GOOS=linux GOARCH=amd64 make build
 	GOOS=darwin GOARCH=amd64 make build
+	GOOS=windows GOARCH=386 make build
+	GOOS=windows GOARCH=amd64 make build
 
 install: test
 	go install \
