@@ -1,5 +1,5 @@
 # Source: https://github.com/rebuy-de/golang-template
-# Version: 2.0.1-snapshot
+# Version: 2.0.2-snapshot
 
 FROM golang:1.10-alpine as builder
 
@@ -21,4 +21,4 @@ RUN CGO_ENABLED=0 make install
 
 FROM alpine:latest
 COPY --from=builder /go/bin/example /usr/local/bin/
-ENTRYPOINT /usr/local/bin/example
+ENTRYPOINT ["/usr/local/bin/example"]
