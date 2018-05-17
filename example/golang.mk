@@ -1,5 +1,5 @@
 # Source: https://github.com/rebuy-de/golang-template
-# Version: 2.0.3
+# Version: 2.0.4-snapshot
 # Dependencies:
 # * dep (https://github.com/golang/dep)
 # * gocov (https://github.com/axw/gocov)
