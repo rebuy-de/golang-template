@@ -31,11 +31,11 @@ GOPKGS=$(shell go list ./...)
 default: build
 
 Gopkg.lock: Gopkg.toml
-	dep ensure
+	dep ensure -v
 	touch Gopkg.lock
 
 vendor: Gopkg.lock Gopkg.toml
-	dep ensure -vendor-only
+	dep ensure -v -vendor-only
 	touch vendor
 
 format:
