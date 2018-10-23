@@ -74,7 +74,7 @@ xc:
 	GOOS=windows GOARCH=386 make build
 	GOOS=windows GOARCH=amd64 make build
 
-install: test
+install: vendor test
 	go install \
 		$(BUILD_FLAGS)
 
