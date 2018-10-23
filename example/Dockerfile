@@ -1,7 +1,7 @@
 # Source: https://github.com/rebuy-de/golang-template
 # Version: 2.0.4-snapshot
 
-FROM golang:1.10-alpine as builder
+FROM golang:1.11-alpine as builder
 
 RUN apk add --no-cache git make
 
