@@ -1,5 +1,4 @@
 # Source: https://github.com/rebuy-de/golang-template
-# Version: xxxx
 
 TARGETS?="."
 PACKAGE=$(shell GOPATH= go list $(TARGET))

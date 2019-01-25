@@ -1,3 +1,5 @@
+# Source: https://github.com/rebuy-de/golang-template
+
 TARGETS?="."
 PACKAGE=$(shell GOPATH= go list $(TARGET))
 NAME=$(notdir $(PACKAGE))
