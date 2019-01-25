@@ -1,24 +1,36 @@
 # Source: https://github.com/rebuy-de/golang-template
-# Version: 2.0.4-snapshot
+# Version: xxxx
 
 FROM golang:1.11-alpine as builder
 
-RUN apk add --no-cache git make
+RUN apk add --no-cache git make curl openssl
 
 # Configure Go
-ENV GOPATH /go
-ENV PATH /go/bin:$PATH
+ENV GOPATH=/go PATH=/go/bin:$PATH CGO_ENABLED=0 GO111MODULE=on
 RUN mkdir -p ${GOPATH}/src ${GOPATH}/bin
 
 # Install Go Tools
-RUN go get -u golang.org/x/lint/golint
-RUN go get -u github.com/golang/dep/cmd/dep
+RUN GO111MODULE= go get -u golang.org/x/lint/golint
 
-COPY . /go/src/github.com/rebuy-de/golang-template/example
-WORKDIR /go/src/github.com/rebuy-de/golang-template/example
-RUN CGO_ENABLED=0 make install
+# Install kubectl
+RUN set -x \
+ && curl -O https://storage.googleapis.com/kubernetes-release/release/v1.11.6/bin/linux/amd64/kubectl \
+ && mv kubectl /usr/local/bin/kubectl \
+ && chmod 755 /usr/local/bin/kubectl \
+ && kubectl version --client
 
+COPY . /src
+WORKDIR /src
+RUN set -x \
+ && make test \
+ && make build \
+ && cp --dereference /src/dist/* /usr/local/bin/
+
+RUN set -x \
+ && kubernetes-deployment version \
+ && k26r version
 
 FROM alpine:latest
-COPY --from=builder /go/bin/example /usr/local/bin/
-ENTRYPOINT ["/usr/local/bin/example"]
+
+RUN apk add --no-cache ca-certificates
+COPY --from=builder /usr/local/bin/* /usr/local/bin/
