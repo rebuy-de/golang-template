@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/rebuy-de/golang-template/example/cmd"
 	"github.com/rebuy-de/rebuy-go-sdk/cmdutil"
 	"github.com/sirupsen/logrus"
+
+	"example.com/command/cmd"
 )
 
 func main() {
