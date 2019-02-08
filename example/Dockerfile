@@ -13,7 +13,7 @@ RUN GO111MODULE= go get -u golang.org/x/lint/golint
 
 # Install kubectl
 RUN set -x \
- && curl -O https://storage.googleapis.com/kubernetes-release/release/v1.11.6/bin/linux/amd64/kubectl \
+ && curl -O https://storage.googleapis.com/kubernetes-release/release/v1.13.2/bin/linux/amd64/kubectl \
  && mv kubectl /usr/local/bin/kubectl \
  && chmod 755 /usr/local/bin/kubectl \
  && kubectl version --client
