@@ -4,23 +4,24 @@ A template for new Golang projects.
 
 ## Usage
 
-### Creating a new Project
+### New Project
 
-1. Copy all files from `/example` into the new project.
-2. Take a look at the checklist in `/example/README.md`.
+Just copy the `example` repository and adjust it to your needs.
 
-### Updating
+### GitHub Action
 
-The `golang.mk` is a Makefile include file. This include file and the
-`Dockerfile` are designed to be replaced by an updated version.
+This repo contains a [GitHub Action](https://github.com/features/actions) which
+checks that there is no drift away from the template.
 
-1. Copy updated `Dockerfile` and `golang.mk` into your project.
-2. Take a look at the diff to see if things might break.
+To use it the file `.github/main.workflow` needs to contain this content:
 
-There is also an script, which does that for you. Simply run `./copy.sh <target-dir>` to update the project in the specified directory.
+```
+workflow "Push" {
+  on = "push"
+  resolves = ["Verify Golang Template"]
+}
 
-## Development
-
-1. Do stuff.
-2. Use `release.sh <version>` to bump a release.
-3. Push it.
+action "Verify Golang Template" {
+  uses = "rebuy-de/golang-template@v3.0.0"
+}
+```
