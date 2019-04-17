@@ -1,6 +1,6 @@
 # Source: https://github.com/rebuy-de/golang-template
 
-FROM golang:1.11-alpine as builder
+FROM golang:1.12-alpine as builder
 
 RUN apk add --no-cache git make curl openssl
 
