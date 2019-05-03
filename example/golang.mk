@@ -22,7 +22,7 @@ BUILD_FLAGS=-ldflags "\
 	-X '$(BUILD_XDST).BuildEnvironment=$(BUILD_ENVIRONMENT)' \
 "
 
-GOFILES=$(shell find . -type f -name '*.go' -not -path "./vendor/*")
+GOFILES=$(shell find . -type f -name '*.go' -not -path "./vendor/*" -not -path "./.git/*")
 GOPKGS=$(shell go list ./...)
 
 OUTPUT_FILE=$(NAME)-$(BUILD_VERSION)-$(shell go env GOOS)-$(shell go env GOARCH)$(shell go env GOEXE)
