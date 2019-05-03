@@ -5,7 +5,7 @@ PACKAGE=$(shell GOPATH= go list $(TARGET))
 NAME=$(notdir $(PACKAGE))
 
 BUILD_VERSION=$(shell git describe --always --dirty --tags | tr '-' '.' )
-BUILD_DATE=$(shell date)
+BUILD_DATE=$(shell LC_ALL=C date)
 BUILD_HASH=$(shell git rev-parse HEAD)
 BUILD_MACHINE=$(shell echo $$HOSTNAME)
 BUILD_USER=$(shell whoami)
