@@ -54,6 +54,7 @@ function verify_additions_only {
     local source=${TEMPLATE_DIR}/generated/${1}
     local target=${PROJECT_DIR}/${1}
 
+    sed '/^$/d' $source > $source
 
     (set +eo pipefail
 
