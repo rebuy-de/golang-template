@@ -1,8 +1,8 @@
 # Source: https://github.com/rebuy-de/golang-template
 
-FROM golang:1.12-alpine as builder
+FROM golang:1.13-alpine as builder
 
-RUN apk add --no-cache git make curl openssl
+RUN apk add --no-cache git make
 
 # Configure Go
 ENV GOPATH=/go PATH=/go/bin:$PATH CGO_ENABLED=0 GO111MODULE=on
