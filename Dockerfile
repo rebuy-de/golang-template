@@ -1,8 +1,5 @@
+FROM quay.io/rebuy/rebuy-go-sdk:v2.4.0 as builder
+
 FROM alpine:latest
-
-RUN apk add --no-cache diffutils git
-
-ADD . /golang-template
-WORKDIR /golang-template
-
-ENTRYPOINT ["/golang-template/entrypoint.sh"]
+RUN apk add --no-cache ca-certificates
+COPY --from=builder /build/dist/* /usr/local/bin/
